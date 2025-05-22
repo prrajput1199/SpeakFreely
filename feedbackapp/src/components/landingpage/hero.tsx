@@ -37,7 +37,7 @@ const Hero = () => {
                 </AnimatedSection>
 
                 <AnimatedSection animation='fade-up' delay={0.6}>
-                    <div className="relative w-full max-w-4xl mt-12 rounded-lg overflow-hidden shadow-2xl">
+                    <div className="relative w-full max-w-4xl mt-0 md:mt-12 rounded-lg overflow-hidden shadow-2xl">
                         <Image
                             src={DashBoardImg}
                             width={1280}
