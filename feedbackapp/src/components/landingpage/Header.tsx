@@ -1,12 +1,24 @@
 import { Menu, MessageSquare, X } from 'lucide-react'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import AnimatedSection from '../animatedsections/AnimatedSection'
 
 const Header = () => {
     function MobileNav() {
         const [isOpen, setIsOpen] = useState(false)
+
+        useEffect(() => {
+            if (isOpen) {
+                document.body.style.overflowY = 'hidden';
+            } else {
+                document.body.style.overflowY = 'unset';
+            }
+
+            return () => {
+                document.body.style.overflowY = 'unset';
+            };
+        }, [isOpen]);
 
         return (
 
@@ -17,72 +29,72 @@ const Header = () => {
                 </Button>
 
                 {isOpen && (
-                        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
-                            <div className="fixed min-h-screen z-50 right-0 w-full bg-background p-6 shadow-lg flex flex-col justify-between">
-                                <div>
-                                    <div className="flex items-center justify-between mb-8">
-                                        <div className="flex items-center gap-2">
-                                            <MessageSquare className="h-6 w-6 text-primary" />
-                                            <span className="text-xl font-bold">SpeakFreely</span>
-                                        </div>
-                                        <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
-                                            <X className="h-6 w-6" />
-                                            <span className="sr-only">Close menu</span>
-                                        </Button>
+                    <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
+                        <div className="fixed h-screen z-50 right-0 w-full bg-background p-6 shadow-lg flex flex-col justify-between overflow-y-hidden">
+                            <div>
+                                <div className="flex items-center justify-between mb-8">
+                                    <div className="flex items-center gap-2">
+                                        <MessageSquare className="h-6 w-6 text-primary" />
+                                        <span className="text-xl font-bold">SpeakFreely</span>
                                     </div>
-
-
-                                    <nav className="flex flex-col gap-6 z-10">
-                                        <Link
-                                            href="#features"
-                                            className="text-lg font-medium hover:text-primary transition-colors"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            Features
-                                        </Link>
-                                        <Link
-                                            href="#how-it-works"
-                                            className="text-lg font-medium hover:text-primary transition-colors"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            How It Works
-                                        </Link>
-                                        <Link
-                                            href="#testimonials"
-                                            className="text-lg font-medium hover:text-primary transition-colors"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            Testimonials
-                                        </Link>
-                                        <Link
-                                            href="#pricing"
-                                            className="text-lg font-medium hover:text-primary transition-colors"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            Pricing
-                                        </Link>
-                                        <Link
-                                            href="#faq"
-                                            className="text-lg font-medium hover:text-primary transition-colors"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            FAQ
-                                        </Link>
-                                    </nav>
+                                    <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
+                                        <X className="h-6 w-6" />
+                                        <span className="sr-only">Close menu</span>
+                                    </Button>
                                 </div>
 
-                                <div className="mt-8 space-y-4">
-                                    <Link href="/login" className="block w-full">
-                                        <Button variant="outline" className="transition-all duration-300 hover:shadow-md">
-                                            Log in
-                                        </Button>
+
+                                <nav className="flex flex-col gap-6 z-10">
+                                    <Link
+                                        href="#features"
+                                        className="text-lg font-medium hover:text-primary transition-colors"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Features
                                     </Link>
-                                    <Link href="/signup" className="block w-full">
-                                        <Button className="w-full">Get Started</Button>
+                                    <Link
+                                        href="#how-it-works"
+                                        className="text-lg font-medium hover:text-primary transition-colors"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        How It Works
                                     </Link>
-                                </div>
+                                    <Link
+                                        href="#testimonials"
+                                        className="text-lg font-medium hover:text-primary transition-colors"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Testimonials
+                                    </Link>
+                                    <Link
+                                        href="#pricing"
+                                        className="text-lg font-medium hover:text-primary transition-colors"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Pricing
+                                    </Link>
+                                    <Link
+                                        href="#faq"
+                                        className="text-lg font-medium hover:text-primary transition-colors"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        FAQ
+                                    </Link>
+                                </nav>
+                            </div>
+
+                            <div className="mt-8 space-y-4">
+                                <Link href="/login" className="block w-full">
+                                    <Button variant="outline" className="transition-all duration-300 hover:shadow-md">
+                                        Log in
+                                    </Button>
+                                </Link>
+                                <Link href="/signup" className="block w-full">
+                                    <Button className="w-full">Get Started</Button>
+                                </Link>
                             </div>
                         </div>
+                    </div>
                 )}
             </div>
         )
@@ -126,7 +138,10 @@ const Header = () => {
                         </Link>
                     </nav>
 
-                    <MobileNav />
+                    <div className='overflow-y-hidden'>
+                        <MobileNav />
+                    </div>
+
 
                     <div className="hidden md:flex gap-4">
                         <Link href="/sign-in">
