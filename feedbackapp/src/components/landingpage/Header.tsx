@@ -83,13 +83,13 @@ const Header = () => {
                                 </nav>
                             </div>
 
-                            <div className="mt-8 space-y-4">
-                                <Link href="/login" className="block w-full">
+                            <div className="mt-8 mb-12 space-y-4">
+                                <Link href="/sign-in" className="block w-full">
                                     <Button variant="outline" className="transition-all duration-300 hover:shadow-md">
                                         Log in
                                     </Button>
                                 </Link>
-                                <Link href="/signup" className="block w-full">
+                                <Link href="/sign-up" className="block w-full">
                                     <Button className="w-full">Get Started</Button>
                                 </Link>
                             </div>
