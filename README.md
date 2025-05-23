@@ -10,18 +10,15 @@
 
   <p><strong>Speak Freely</strong> is a web app that lets users create an account and receive anonymous feedback through a personalized link. Built with <strong>Next.js</strong>, it supports email verification, anonymous messaging, dark/light mode, and even suggests helpful feedback via the Gemini API.</p>
 
-  <img src="https://via.placeholder.com/800x400.png?text=Speak+Freely+Screenshot" alt="Speak Freely Screenshot">
-
   <h2>✨ Features</h2>
   <ul>
-    <li>🔐 Email-based user authentication (NextAuth + Resend)</li>
-    <li>🔗 Unique anonymous feedback link for each user</li>
-    <li>🧠 Gemini API integration to suggest helpful messages</li>
-    <li>📥 Dashboard to view all received feedbacks</li>
-    <li>🚦 Enable or disable feedback at any time</li>
-    <li>✅ Real-time username availability check while typing</li>
-    <li>🎨 Light and Dark Mode toggle</li>
-    <li>🎞️ Smooth UI animations with Framer Motion</li>
+    <li> Email-based user authentication (NextAuth + Resend)</li>
+    <li> Unique anonymous feedback link for each user</li>
+    <li> Dashboard to view all received feedbacks</li>
+    <li> Enable or disable feedback at any time</li>
+    <li> Real-time username availability check while typing</li>
+    <li> Light and Dark Mode toggle</li>
+    <li> Smooth UI animations with Framer Motion</li>
   </ul>
 
   <h2>🛠 Tech Stack</h2>
