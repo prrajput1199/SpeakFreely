@@ -41,15 +41,16 @@
     <li>Clone the repository:</li>
     <pre><code>git clone https://github.com/prrajput1199/speak-freely.git</code></pre>
     <li>Navigate to the project folder:</li>
-    <pre><code>cd speak-freely</code></pre>
+    <pre><code>cd feebackapp</code></pre>
     <li>Install dependencies:</li>
     <pre><code>npm install</code></pre>
     <li>Create a <code>.env.local</code> file in the root and add the following environment variables:</li>
     <pre><code>
-       NEXTAUTH_URL=http://localhost:3000
-       NEXTAUTH_SECRET=your_secret
-       RESEND_API_KEY=your_resend_api_key
-       GEMINI_API_KEY=your_gemini_api_key
+      MONGODB_URL= ""
+      RESEND_API_KEY= ""
+      NEXTAUTH_SECRET = ""
+      NEXTAUTH_URL= "http://localhost:3000"
+      GEMINI_API_KEY=""
     </code></pre>
     <li>Run the development server:</li>
     <pre><code>npm run dev</code></pre>
