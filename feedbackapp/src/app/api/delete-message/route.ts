@@ -3,6 +3,7 @@ import userModel from "@/model/Users";
 import { getServerSession, User } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/option";
 import { NextRequest } from "next/server";
+import  { ObjectId } from "mongoose";
 
 export async function DELETE(
     req: NextRequest
@@ -12,7 +13,6 @@ export async function DELETE(
     const session = await getServerSession(authOptions);
 
     const currentUser = session?.user as User;
-
     if (!session || !session?.user) {
         return Response.json({
             success: "false",
@@ -25,7 +25,7 @@ export async function DELETE(
     try {
         const UpdatedResult = await userModel.updateOne(
             { _id: currentUser._id },
-            { $pull: { messages: { _id: DeleteMessageID } } }
+            { $pull: { messages: { _id: DeleteMessageID as ObjectId} } }
         )
 
         if (UpdatedResult.modifiedCount == 0) {

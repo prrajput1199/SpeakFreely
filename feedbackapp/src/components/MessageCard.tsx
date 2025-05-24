@@ -37,9 +37,9 @@ const MessageCard = ({ message, onMsgDelete }: MessageCardProps) => {
         const DeleteMessageID = message._id;
         try {
             const response = await axios.delete(`/api/delete-message`, {
-                data: { messageID: DeleteMessageID }
+                data: { DeleteMessageID: DeleteMessageID }
             });
-            toast(response.data.message);
+            toast.success(response.data.message);
             const messageId = message._id as string;
             onMsgDelete(messageId);
         } catch (error) {
@@ -72,8 +72,8 @@ const MessageCard = ({ message, onMsgDelete }: MessageCardProps) => {
                                 <AlertDialogCancel>
                                     Cancel
                                 </AlertDialogCancel>
-                                <AlertDialogAction onClick={HandleDeleteConfirmation}>
-                                    Continue
+                                <AlertDialogAction onClick={HandleDeleteConfirmation} className='bg-red-600 hover:bg-red-700'>
+                                    Delete
                                 </AlertDialogAction>
                             </AlertDialogFooter>
                         </AlertDialogContent>

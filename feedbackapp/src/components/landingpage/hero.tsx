@@ -8,7 +8,8 @@ import AnimatedSection from '../animatedsections/AnimatedSection'
 
 const Hero = () => {
     return (
-        <section className="px-4 py-12 md:py-24 lg:py-32 bg-gradient-to-b from-background to-muted">
+        <section className="relative overflow-hidden px-4 py-12 md:py-24 lg:py-32 bg-gradient-to-b from-background to-muted ">
+            
             <div className="container flex flex-col items-center text-center space-y-8">
                 <AnimatedSection animation='fade-right' >
                     <div className="inline-block rounded-full bg-muted px-3 py-1 text-sm">Honest Feedback Made Simple</div>

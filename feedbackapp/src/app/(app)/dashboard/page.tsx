@@ -112,7 +112,7 @@ const DashBoard = () => {
 
   return (
     <>
-      <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
+      <div className="relative my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-muted rounded w-full max-w-6xl">
         <div className='flex justify-end'>
           <Button onClick={() => signOut()} >Log out</Button>
         </div>
@@ -121,44 +121,52 @@ const DashBoard = () => {
           <div className="text-lg font-semibold mb-2">
             Copy your unique Link
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <Input type="text" value={profileURL} disabled />
-            <Button onClick={copyyToClickBoard}>Copy</Button>
+            <Button onClick={copyyToClickBoard} variant={'secondary'}>Copy</Button>
           </div>
         </div>
 
         <div className="mb-4">
-          <Switch
-            {...register('acceptMessages')}
-            checked={acceptMessages}
-            onCheckedChange={handleSwitch}
-            disabled={isSwitchLoading}
-          />
 
-          <span className="ml-2"> Accept Messages: {acceptMessages ? "On" : "Off"} </span>
+          <div className='flex items-center gap-2'>
+            <Button className='mr-2' variant="secondary" onClick={(e) => {
+              e.preventDefault();
+              FetchMessages(true)
+            }}>
+              {
+                isLoading ? <LoaderCircle className='h-4 w-4 animate-spin' /> : <RefreshCcw className='h-4 w-4' />
+              }
+            </Button>
 
-          <Button className='mt-4' variant="outline" onClick={(e) => {
-            e.preventDefault();
-            FetchMessages(true)
-          }}>
-            {
-              isLoading ? <LoaderCircle className='h-4 w-4 animate-spin' /> : <RefreshCcw className='h-4 w-4' />
-            }
-          </Button>
+            <Switch
+              {...register('acceptMessages')}
+              checked={acceptMessages}
+              onCheckedChange={handleSwitch}
+              disabled={isSwitchLoading}
+            />
 
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {
-              messages.length > 0 ? (
-                messages.map((message, index) => {
-                  return (
-                    <MessageCard key={index} message={message} onMsgDelete={HandleDeleteMessages} />
-                  )
-                })) : (<div className='text-center'>No messages to display</div>)
-            }
+            <span className="ml-2"> <span className='font-bold mr-2'>Accept Messages:</span> {acceptMessages ? "On" : "Off"} </span>
           </div>
 
 
+          {
+            messages.length > 0 ? (
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">{messages.map((message, index) => {
+                return (
+                  <MessageCard key={index} message={message} onMsgDelete={HandleDeleteMessages} />
+                )
+              })}
+              </div>)
+              : (
+                <div className='flex justify-center items-center min-h-[300px]'>
+                  <h2 className='text-center font-bold'>No messages to display</h2>
+                </div>
+              )
+          }
         </div>
+
+
       </div>
     </>
 
