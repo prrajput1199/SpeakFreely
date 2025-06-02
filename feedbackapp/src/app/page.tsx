@@ -2,10 +2,8 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import PricingCard from "@/components/landingpage/PricingCard";
 ;
 import publicSpeaking from "../../public/Lively Group Discussion.jpeg";
@@ -18,14 +16,16 @@ import {
 import { testimonials } from "../../data"
 import Header from "@/components/landingpage/Header"
 import Hero from "@/components/landingpage/hero"
-import Logos from "@/components/landingpage/Logos"
+// import Logos from "@/components/landingpage/Logos"
 import { MessageSquare } from "lucide-react"
 import TestimonialCard from "@/components/landingpage/TestimonialCard"
 import { AnimatedCounter } from "@/components/animatedsections/AnimatedCounter"
 import AnimatedSection from "@/components/animatedsections/AnimatedSection"
 import StepCard from "@/components/landingpage/StepCard"
+import { useTheme } from "next-themes"
 
 export default function LandingPage() {
+  const { theme } = useTheme();
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth"
 
@@ -42,47 +42,59 @@ export default function LandingPage() {
   const plugin = useRef(
     Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false })
   );
+
+     const [isClient, setIsClient] = useState(false)
+
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) {
+        return null
+    }
+
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
       <Header />
       <main className="flex-1">
         <Hero />
-        <Logos />
+        {/* <Logos /> */}
 
-        <section className="py-16 bg-background">
+        <section className={`py-16 ${theme === "light" ? "blue-to-white-bottom" : "black-to-blue-45deg"}`}>
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <AnimatedSection animation="fade-up">
+              <AnimatedSection animation="fade-right">
                 <div className="p-6">
                   <AnimatedCounter end={98} suffix="%" className="text-4xl font-bold text-primary mb-2" />
-                  <p className="text-muted-foreground">Satisfaction Rate</p>
+                  <p className="text-muted-foreground dark:text-[#F5F5F5]">Satisfaction Rate</p>
                 </div>
               </AnimatedSection>
 
               <AnimatedSection animation="fade-up">
                 <div className="p-6">
                   <AnimatedCounter end={10000} suffix="+" className="text-4xl font-bold text-primary mb-2" />
-                  <p className="text-muted-foreground">Teams Using FeedbackLoop</p>
+                  <p className="text-muted-foreground dark:text-[#F5F5F5]">Teams Using SpeakFreely</p>
                 </div>
               </AnimatedSection>
 
               <AnimatedSection animation="fade-up">
                 <div className="p-6">
                   <AnimatedCounter end={5} suffix="M+" className="text-4xl font-bold text-primary mb-2" />
-                  <p className="text-muted-foreground">Feedback Responses Collected</p>
+                  <p className="text-muted-foreground dark:text-[#F5F5F5]">Feedback Responses Collected</p>
                 </div>
               </AnimatedSection>
             </div>
           </div>
         </section>
         {/* How It Works Section */}
-        <section id="how-it-works" className="py-16 md:py-24 bg-muted">
+        <section id="how-it-works" className={`py-16 md:py-24 ${theme === "light" ? "blue-to-white-top" : "blue-to-black-45deg"}`}>
           <div className="container space-y-16">
             <AnimatedSection animation="fade-down">
               <div className="text-center space-y-4">
-                <div className="inline-block rounded-full bg-background px-3 py-1 text-sm">Simple Process</div>
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">How SpeakFreely Works</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                <div className="inline-block rounded-full bg-primary px-4 py-1 text-white text-sm">Simple Process</div>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">How <span className="text-primary">SpeakFreely</span> Works</h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto dark:text-[#F5F5F5]">
                   Our streamlined process makes it easy to start collecting valuable feedback in minutes.
                 </p>
               </div>
@@ -98,7 +110,7 @@ export default function LandingPage() {
                 />
               </AnimatedSection>
 
-              <AnimatedSection animation="fade-down" delay={0.2}>
+              <AnimatedSection animation="fade-down" delay={0.4}>
                 <StepCard
                   number="2"
                   title="Share Your Link Anywhere"
@@ -106,7 +118,7 @@ export default function LandingPage() {
                 />
               </AnimatedSection>
 
-              <AnimatedSection animation="fade-up" delay={0.4}>
+              <AnimatedSection animation="fade-up" delay={0.6}>
                 <StepCard
                   number="3"
                   title="Receive & View Messages"
@@ -114,7 +126,7 @@ export default function LandingPage() {
                 />
               </AnimatedSection>
 
-              <AnimatedSection animation="fade-right" delay={0.6}>
+              <AnimatedSection animation="fade-right" delay={0.8}>
                 <StepCard
                   number="4"
                   title="Encourage Fun & Honest Conversations"
@@ -126,7 +138,7 @@ export default function LandingPage() {
 
 
             <AnimatedSection animation="Zoom-in" delay={0.6}>
-              <div className="relative w-full max-w-4xl mx-auto mt-12 rounded-lg overflow-hidden shadow-xl">
+              <div className={`relative w-full max-w-4xl mx-auto mt-12 rounded-lg overflow-hidden ${theme === "light" ? "shadow-[0px_4px_80px_rgba(50,133,255,0.2)] " : "shadow-[0px_4px_80px_rgba(50,133,255,0.5)]"}`}>
                 <Image
                   src={publicSpeaking}
                   width={1200}
@@ -142,106 +154,107 @@ export default function LandingPage() {
         </section >
 
         {/* Testimonials Section */}
-        < section id="testimonials" className="py-16 md:py-24" >
+        < section id="testimonials" className={`py-16 md:py-24 ${theme === "light" ? "blue-to-white-bottom" : "black-to-blue-45deg"}`}>
           <div className="container space-y-16">
 
             <AnimatedSection animation="fade-down">
               <div className="text-center space-y-4">
-                <div className="inline-block rounded-full bg-muted px-3 py-1 text-sm">Success Stories</div>
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">What Our Customers Say</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                <div className="inline-block rounded-full bg-primary px-4 py-1 text-white text-sm">Success Stories</div>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">What Our <span className="text-primary">Customers</span> Say</h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto dark:text-[#F5F5F5]">
                   See how SpeakFreely has transformed communication and culture for teams worldwide.
                 </p>
               </div>
 
             </AnimatedSection>
 
-            <Carousel
-              plugins={[plugin.current]}
-              className="w-full"
-              onMouseEnter={plugin.current.stop}
-              onMouseLeave={plugin.current.reset}
-              opts={{
-                loop: true
-              }}
-            >
-              <CarouselContent className="-ml-4">
-                {testimonials.map((testimonial, index) => (
-                  <CarouselItem
-                    key={index}
-                    className="pl-4 w-full sm:basis-full md:basis-1/2 lg:basis-1/3"
-                  >
-                    <TestimonialCard
-                      quote={testimonial.quote}
-                      author={testimonial.author}
-                      role={testimonial.role}
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
+            <div className="p-6">
+              <Carousel
+                plugins={[plugin.current]}
+                className="w-full"
+                onMouseEnter={plugin.current.stop}
+                onMouseLeave={plugin.current.reset}
+                opts={{
+                  loop: true
+                }}
+              >
+
+                <CarouselContent className="-ml-4">
+                  {testimonials.map((testimonial, index) => (
+                    <CarouselItem
+                      key={index}
+                      className="pl-4 w-full sm:basis-full md:basis-1/2 lg:basis-1/3"
+                    >
+                      <TestimonialCard
+                        quote={testimonial.quote}
+                        author={testimonial.author}
+                        role={testimonial.role}
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
 
 
+              </Carousel>
+            </div>
           </div>
         </section >
 
         {/* Pricing Section */}
-        < section id="pricing" className="py-16 md:py-24 bg-muted" >
+        < section id="pricing" className={`py-16 md:py-24 ${theme === "light" ? "blue-to-white-top" : "blue-to-black-45deg"}`} >
           <div className="container space-y-16">
             <AnimatedSection animation="fade-up">
               <div className="text-center space-y-4">
-                <div className="inline-block rounded-full bg-background px-3 py-1 text-sm">Pricing Plans</div>
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Simple, Transparent Pricing</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                <div className="inline-block rounded-full bg-primary px-3 py-1 text-sm">Pricing Plans</div>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Simple, Transparent <span className="text-primary">Pricing</span></h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto dark:text-[#F5F5F5]">
                   Choose the plan that works best for your team&apos;s feedback needs.
                 </p>
               </div>
             </AnimatedSection>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 md:items-stretch gap-8">
               <AnimatedSection animation="Zoom-in">
                 <PricingCard
                   period=""
-                  title="Starter"
+                  title="Individuals/Students"
                   price="$0"
-                  description="Perfect for small teams just getting started with feedback."
-                  features={["Up to 10 team members", "3 feedback forms", "Basic analytics", "Email support"]}
+                  description="Perfect for students just getting started with feedback.."
+                  features={["Unlimited feedback collection", "Public shareable feedback link", "View feedback on your dashboard"]}
                   buttonText="Start for Free"
                   popular={false}
                 />
               </AnimatedSection>
               <AnimatedSection animation="Zoom-in" delay={0.6}>
                 <PricingCard
-                  title="Professional"
-                  price="$29"
-                  period="per month"
+                  title="Professionals/Creators"
+                  price="$5"
+                  period="/month"
                   description="Ideal for growing teams that need more advanced features."
                   features={[
-                    "Up to 50 team members",
-                    "Unlimited feedback forms",
-                    "Advanced analytics",
-                    "Priority support",
-                    "Custom branding",
+                    "All Free features",
+                    "Custom feedback questions",
+                    "Feedback tagging & filters",
+                    "Email notifications"
                   ]}
-                  buttonText="Get Started"
+                  buttonText="Upgrade to Pro"
                   popular={true}
                 />
               </AnimatedSection>
               <AnimatedSection animation="Zoom-in" delay={0.8}>
                 <PricingCard
-                  title="Enterprise"
-                  price="Custom"
-                  period=""
+                  title="Startups / Organizations"
+                  price="$15"
+                  period="/month"
                   description="For large organizations with specific requirements."
                   features={[
-                    "Unlimited team members",
-                    "Unlimited feedback forms",
-                    "Advanced analytics & reporting",
-                    "Dedicated account manager",
-                    "Custom integrations",
-                    "SSO & advanced security",
+                    "All Pro features",
+                    "Team dashboard & analytics",
+                    "Multiple feedback links",
+                    "Export to CSV/Excel",
+                    "Priority support",
                   ]}
-                  buttonText="Contact Sales"
+                  buttonText="Boost Team Feedback"
                   popular={false}
                 />
               </AnimatedSection>
@@ -251,11 +264,11 @@ export default function LandingPage() {
 
         {/* FAQ Section */}
         <AnimatedSection animation="fade-right">
-          < section id="faq" className="py-16 md:py-24" >
+          < section id="faq" className={`py-16 md:py-24 ${theme === "light" ? "blue-to-white-bottom" : "blue-to-black-45deg"}`} >
             <div className="container space-y-16">
               <div className="text-center space-y-4">
-                <div className="inline-block rounded-full bg-muted px-3 py-1 text-sm">Common Questions</div>
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Frequently Asked Questions</h2>
+                <div className="inline-block rounded-full bg-primary px-3 py-1 text-white text-sm">Common Questions</div>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Frequently Asked <span className="text-primary">Questions</span></h2>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                   Find answers to common questions about SpeakFreely.
                 </p>
@@ -309,8 +322,8 @@ export default function LandingPage() {
 
 
         {/* CTA Section */}
-        <AnimatedSection animation="fade-left" delay={0.6}>
-          < section className="py-16 md:py-24 bg-primary text-primary-foreground" >
+        {/* <AnimatedSection animation="fade-left" delay={0.6}>
+          < section className="py-16 md:py-24 blue-to-white-top text-primary-foreground" >
             <div className="container text-center space-y-8">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
                 Ready to Transform Your Feedback Culture?
@@ -336,43 +349,43 @@ export default function LandingPage() {
               </div>
             </div>
           </section >
-        </AnimatedSection>
+        </AnimatedSection> */}
 
       </main >
 
 
-      <footer className="border-t py-12 bg-muted/30">
+      <footer className={`border-t py-12 text-black ${theme === "light" ? "blue-to-white-bottom" : "blue-to-black-45deg"}`}>
         <div className="container grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <MessageSquare className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold">SpeakFreely</span>
+              <MessageSquare className="h-6 w-6 text-black dark:text-[#F5F5F5]" />
+              <span className="text-xl font-bold dark:text-white">SpeakFreely</span>
             </div>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground dark:text-[#F5F5F5]">
               Honest feedback made simple. Build better products and stronger teams with anonymous feedback.
             </p>
           </div>
 
           <div>
-            <h3 className="font-medium mb-4">Product</h3>
+            <h3 className="font-medium mb-4 dark:text-white">Product</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="#features" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link href="/integrations" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/integrations" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Integrations
                 </Link>
               </li>
               <li>
-                <Link href="/roadmap" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/roadmap" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Roadmap
                 </Link>
               </li>
@@ -380,25 +393,25 @@ export default function LandingPage() {
           </div>
 
           <div>
-            <h3 className="font-medium mb-4">Resources</h3>
+            <h3 className="font-medium mb-4 dark:text-white">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/guides" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/guides" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Guides
                 </Link>
               </li>
               <li>
-                <Link href="/help" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/help" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="/webinars" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/webinars" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Webinars
                 </Link>
               </li>
@@ -406,25 +419,25 @@ export default function LandingPage() {
           </div>
 
           <div>
-            <h3 className="font-medium mb-4">Company</h3>
+            <h3 className="font-medium mb-4 dark:text-white">Company</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/careers" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Careers
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/legal" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/legal" className="text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
                   Legal
                 </Link>
               </li>
@@ -433,17 +446,17 @@ export default function LandingPage() {
         </div>
 
         <div className="container mt-12 pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground dark:text-[#F5F5F5]">
             © {new Date().getFullYear()} SpeakFreely. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
               Terms of Service
             </Link>
-            <Link href="/cookies" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/cookies" className="text-sm text-muted-foreground hover:text-foreground transition-colors dark:text-[#F5F5F5]">
               Cookies
             </Link>
           </div>

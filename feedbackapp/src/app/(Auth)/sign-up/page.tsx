@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
+import { useTheme } from "next-themes"
 
 const SignUpPage = () => {
     const [username, setUsername] = useState('')
@@ -31,6 +32,7 @@ const SignUpPage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const debounced = useDebounceCallback(setUsername, 500);
     const router = useRouter();
+    const { theme } = useTheme();
 
     const form = useForm<z.infer<typeof signUpSchema>>({
         resolver: zodResolver(signUpSchema),
@@ -46,8 +48,8 @@ const SignUpPage = () => {
     useEffect(() => {
         const checkUniqueUserName = async () => {
             if (username) {
-                 setIsCheckingUsername(true);
-                 setUsernameResponseMessage('');
+                setIsCheckingUsername(true);
+                setUsernameResponseMessage('');
                 try {
                     const response = await axios.get(`/api/check-unique-username?username=${username}`);
                     setUsernameResponseMessage(response.data.message);
@@ -81,8 +83,8 @@ const SignUpPage = () => {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+        <div className={`flex justify-center items-center min-h-screen ${theme === "light" ? "blue-to-white-right" : "bg-black"}`}>
+            <div className={`w-full max-w-md p-8 space-y-8 ${theme === "light" ? "bg-white shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.3)]" : "bg-black shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.6)]"} rounded-lg`}>
                 <div className="text-center">
                     <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
                         Join Speak freely
@@ -107,7 +109,7 @@ const SignUpPage = () => {
                                     </FormControl>
                                     {isCheckingUsername && <LoaderCircle />}
 
-                                    <p className={`text-sm ${usernameResponseMessage === "Username is unique" ? "text-green-500" :"text-red-500"}`}>
+                                    <p className={`text-sm ${usernameResponseMessage === "Username is unique" ? "text-green-500" : "text-red-500"}`}>
                                         {usernameResponseMessage}
                                     </p>
                                 </FormItem>

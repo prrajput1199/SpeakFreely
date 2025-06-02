@@ -50,7 +50,7 @@ const MessageCard = ({ message, onMsgDelete }: MessageCardProps) => {
     }
 
     return (
-        <Card className="card-bordered">
+        <Card className="card-bordered border-[#3285FF] shadow-[0px_4px_15px_rgba(50,133,255,0.2)]">
             <CardHeader>
                 <div className="flex justify-between items-center">
                     <CardTitle>{message.content}</CardTitle>

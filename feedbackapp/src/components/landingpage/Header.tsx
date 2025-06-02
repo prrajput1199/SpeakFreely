@@ -1,10 +1,20 @@
-import { Menu, MessageSquare, X } from 'lucide-react'
+'use client'
+
+import { Menu, MessageSquare, Moon, Sun, X } from 'lucide-react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import AnimatedSection from '../animatedsections/AnimatedSection'
+import { useTheme } from 'next-themes';
 
 const Header = () => {
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
+
     function MobileNav() {
         const [isOpen, setIsOpen] = useState(false)
 
@@ -101,38 +111,38 @@ const Header = () => {
     }
     return (
 
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className={`fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${theme === "light" ? "blue-to-white-right" : "blue-to-black-45deg"}`}>
             <AnimatedSection animation="fade-left">
                 <div className="container flex h-16 items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <MessageSquare className="h-6 w-6 text-primary" />
+                        <MessageSquare className={`h-6 w-6 ${theme === "light" ? "text-primary " : "text-white"}`} />
                         <span className="text-xl font-bold">SpeakFreely</span>
                     </div>
 
                     <nav className="hidden lg:flex gap-6">
-                        <Link href="#features" className="text-sm font-medium hover:text-primary transition-colors relative group">
+                        <Link href="#features" className="text-sm font-medium hover:text-white transition-colors relative group">
                             Features
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                         </Link>
                         <Link
                             href="#how-it-works"
-                            className="text-sm font-medium hover:text-primary transition-colors relative group"
+                            className="text-sm font-medium hover:text-white transition-colors relative group"
                         >
                             How It Works
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                         </Link>
                         <Link
                             href="#testimonials"
-                            className="text-sm font-medium hover:text-primary transition-colors relative group"
+                            className="text-sm font-medium hover:text-white transition-colors relative group"
                         >
                             Testimonials
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                         </Link>
-                        <Link href="#pricing" className="text-sm font-medium hover:text-primary transition-colors relative group">
+                        <Link href="#pricing" className="text-sm font-medium hover:text-white transition-colors relative group">
                             Pricing
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                         </Link>
-                        <Link href="#faq" className="text-sm font-medium hover:text-primary transition-colors relative group">
+                        <Link href="#faq" className="text-sm font-medium hover:text-white transition-colors relative group">
                             FAQ
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                         </Link>
@@ -144,11 +154,17 @@ const Header = () => {
 
 
                     <div className="hidden md:flex gap-4">
+                        <button
+                            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                            className="px-4 py-2 rounded"
+                        >
+                            {theme === 'dark' ? <Sun /> : <Moon />}
+                        </button>
                         <Link href="/sign-in">
-                            <Button variant="outline">Log in</Button>
+                            <Button className={` ${theme === "light" ?"border border-black text-black bg-white hover:bg-black hover:text-white":"border text-black bg-white hover:bg-black hover:text-white hover:border-white"}`}>Log in</Button>
                         </Link>
                         <Link href="/sign-up">
-                            <Button>Get Started</Button>
+                            <Button className={`bg-dark-navy-blue text-white`}>Get Started</Button>
                         </Link>
                     </div>
                 </div>

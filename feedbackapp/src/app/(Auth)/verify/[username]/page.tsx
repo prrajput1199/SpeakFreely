@@ -22,12 +22,14 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useParams, useRouter } from "next/navigation"
 import { verifySchema } from "@/schemas/verifySchema"
+import { useTheme } from "next-themes"
 
 const VerifyYourAccount = () => {
     const router = useRouter();
     const params = useParams<{ username: string }>();
     const { username } = params;
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const { theme } = useTheme();
 
     const form = useForm<z.infer<typeof verifySchema>>({
         resolver: zodResolver(verifySchema),
@@ -53,8 +55,8 @@ const VerifyYourAccount = () => {
 
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+        <div className={`flex justify-center items-center min-h-screen ${theme === "light" ? "blue-to-white-right" : "bg-black"}`}>
+            <div className={`w-full max-w-md p-8 space-y-8 ${theme === "light" ? "bg-white shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.3)]" : "bg-black shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.6)]"} rounded-lg`}>
                 <div className="text-center">
                     <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
                         Verify Your Acoount

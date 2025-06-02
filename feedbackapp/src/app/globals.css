@@ -51,7 +51,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.6328 0.1984 258.59);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -76,6 +76,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --custom-gradient: linear-gradient(45deg, oklch(0.6328 0.1984 258.59), oklch(0 0 0));
 }
 
 .dark {
@@ -85,7 +86,8 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
+  /* --primary: oklch(0.922 0 0); */
+  --primary: oklch(0.6328 0.1984 258.59);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -126,6 +128,66 @@
       padding-right: 2rem;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .blue-to-white-right {
+      background: linear-gradient(to right, rgba(232, 238, 252, 0.3) 0%, rgba(245, 245, 253, 0.5) 100%);
+    }
+
+    .bg-dark-navy-blue {
+      background: #3285FF;
+    }
+
+    .bg-navy-blue-light {
+      background: #3285FF;
+      opacity: 80%;
+    }
+
+    .color-dark-navy-blue {
+      color: #3285FF;
+    }
+
+    .blue-to-white-bottom {
+      background: linear-gradient(to bottom,
+          rgba(245, 245, 253, 0.6) 0%,
+          rgba(230, 237, 253, 0.6) 50%,
+          rgba(255, 255, 255, 1) 100%);
+      ;
+    }
+
+
+    .blue-to-white-top {
+      background: linear-gradient(to top,
+          rgba(245, 245, 253, 0.6) 0%,
+          rgba(230, 237, 253, 0.6) 50%,
+          rgba(255, 255, 255, 1) 100%);
+      ;
+    }
+
+    .gradient-bg {
+      background: radial-gradient(#E8EEFC 2%,
+          #E6EDFD 53%,
+          #F5F5FD, 100%);
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    .blue-to-black-45deg {
+      background: linear-gradient(45deg, #3285FF, #000000 45%, #000000);
+    }
+
+
+    .black-to-blue-45deg {
+      background: linear-gradient(45deg, #000000, #000000 45%, #3285FF);
     }
 
     @media (min-width: 1400px) {

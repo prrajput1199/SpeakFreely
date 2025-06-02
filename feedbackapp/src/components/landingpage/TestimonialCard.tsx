@@ -1,3 +1,4 @@
+import { useTheme } from 'next-themes'
 import React from 'react'
 
 interface testiMonialCardprops {
@@ -5,8 +6,10 @@ interface testiMonialCardprops {
 }
 
 const TestimonialCard = ({ quote, author, role }: testiMonialCardprops) => {
+  const { theme } = useTheme();
   return (
-    <div className="bg-background rounded-lg p-6 shadow-sm border">
+    <div className={`relative rounded-lg p-6 mt-4 mb-4 ml-2  ${theme === "light" ? "bg-white" : "bg-black"} shadow-[0px_4px_5px_rgba(50,133,255,0.2)] border-[#3285FF]`}>
+      <div className="pointer-events-none absolute inset-0 z-50 bg-[linear-gradient(to_right,rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:10px_10px]" />
       <div className="mb-4 text-primary">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

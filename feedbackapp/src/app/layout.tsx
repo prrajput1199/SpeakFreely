@@ -1,6 +1,9 @@
+'use client'
+
 import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
 import { Toaster } from "@/components/ui/sonner"
+import { ThemeProvider } from "./providers";
 
 export default function RootLayout({
   children,
@@ -8,11 +11,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <AuthProvider>
         <body>
-          {children}
-          <Toaster richColors/>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
+            {children}
+            <Toaster richColors />
+          </ThemeProvider>
         </body>
       </AuthProvider>
     </html>
