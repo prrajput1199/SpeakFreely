@@ -12,6 +12,7 @@ import axios, { AxiosError } from 'axios';
 import { LoaderCircle, RefreshCcw } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -109,7 +110,7 @@ const DashBoard = () => {
   }
 
   if (!session || !session.user) {
-    return <a href='/sign-in' className='w-full h-full flex items-center justify-center'><Button>Please Login</Button></a>
+    return <Link href='/' className='w-full h-screen flex items-center justify-center'><Button className='text-white'>Go To Home Page</Button></Link>
   }
 
   return (
