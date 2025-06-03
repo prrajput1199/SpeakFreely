@@ -3,7 +3,6 @@
 import React from 'react'
 import {
     Card,
-    CardContent,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -79,11 +78,13 @@ const MessageCard = ({ message, onMsgDelete }: MessageCardProps) => {
                         </AlertDialogContent>
                     </AlertDialog>
                 </div>
-                <div className="text-sm">
+                <div className="text-sm mt-8">
                     {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
                 </div>
+
+
             </CardHeader>
-            <CardContent></CardContent>
+
         </Card>
     )
 }

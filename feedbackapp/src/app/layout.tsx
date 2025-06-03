@@ -20,7 +20,7 @@ export default function RootLayout({
             enableSystem
           >
             {children}
-            <Toaster richColors />
+            <Toaster richColors/>
           </ThemeProvider>
         </body>
       </AuthProvider>

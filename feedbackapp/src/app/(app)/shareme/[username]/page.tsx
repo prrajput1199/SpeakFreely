@@ -34,13 +34,13 @@ const parseStringMessages = (messageString: string): string[] => {
 };
 
 const initialMessageString =
-  "What's your favorite movie?||Do you have any pets?||What's your dream job?";
+  "The UI was smooth and fast - nice job! Maybe add a few preset prompts or styles to help first-time users explore the tool easily.|| It captured most of the prompt well, especially the background details. Might be good to make character expressions or actions more accurate || Nice work! The product is easy to understand at first glance. It might be helpful to add a short onboarding tooltip or intro text for new users to get started quickly.";
 
 export default function SendMessage() {
   const params = useParams<{ username: string }>();
   const username = params.username;
   const { theme } = useTheme();
-  
+
   const {
     complete,
     completion,
@@ -86,20 +86,21 @@ export default function SendMessage() {
     }
   };
 
-    const [isClient, setIsClient] = useState(false)
-  
-  
-      useEffect(() => {
-          setIsClient(true)
-      }, [])
-  
-      if (!isClient) {
-          return null
-      }
+  const [isClient, setIsClient] = useState(false)
+
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return null
+  }
 
   return (
     <div className="container mx-auto p-6 rounded-lg max-w-4xl">
-      <div className={`relative mx-4 md:mx-8 lg:mx-auto p-6 rounded-lg w-full max-w-6xl ${theme === "light" ? "bg-white shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.3)]" : "bg-black shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.6)]"}`}>
+      <div className={`relative lg:mx-auto p-6 rounded-lg w-full max-w-6xl ${theme === "light" ? "bg-white shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.3)]" : "bg-black shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.6)]"}`}>
+        <div className="pointer-events-none absolute inset-0 z-50 bg-[linear-gradient(to_right,rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:10px_10px]" />
         <h1 className="text-4xl font-bold mb-6 text-center">
           Public Profile Link
         </h1>
@@ -160,7 +161,7 @@ export default function SendMessage() {
                   <Button
                     key={index}
                     variant="outline"
-                    className="mb-2"
+                    className="mb-2 break-words whitespace-normal overflow-hidden p-8"
                     onClick={() => handleMessageClick(message)}
                   >
                     {message}

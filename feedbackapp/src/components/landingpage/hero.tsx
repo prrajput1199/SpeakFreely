@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import DashBoardImg from "../../../public/DashBoard_latest.png"
+import DashBoardImg from "../../../public/DashBoard.png"
 import DashBoardImgDark from "../../../public/Dashboard_dark.png"
 import Link from 'next/link'
 import { Button } from '../ui/button'

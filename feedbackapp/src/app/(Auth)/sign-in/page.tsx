@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import Link from "next/link"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner"
 import { LoaderCircle } from 'lucide-react';
 import {
@@ -57,9 +57,20 @@ const SignInPage = () => {
       router.replace('/dashboard');
     }
   }
+  
+  const [isClient, setIsClient] = useState(false)
 
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return null
+  }
+  
   return (
-    <div className={`flex justify-center items-center min-h-screen ${theme === "light" ? "blue-to-white-right" : "bg-black"}`}>
+    <div className={`p-6 flex justify-center items-center min-h-screen ${theme === "light" ? "blue-to-white-right" : "bg-black"}`}>
       <div className={`w-full max-w-md p-8 space-y-8 ${theme === "light" ? "bg-white shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.3)]" : "bg-black shadow-2xl shadow-[0px_4px_80px_rgba(50,133,255,0.6)]"} rounded-lg`}>
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">

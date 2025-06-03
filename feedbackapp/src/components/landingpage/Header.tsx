@@ -148,8 +148,18 @@ const Header = () => {
                         </Link>
                     </nav>
 
-                    <div className='overflow-y-hidden'>
-                        <MobileNav />
+                    <div className='flex items-center gap-2'>
+                        <button
+                            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                            className="py-2 rounded lg:hidden"
+                        >
+                            {theme === 'dark' ? <Sun /> : <Moon />}
+                        </button>
+
+                        <div className='overflow-y-hidden'>
+                            <MobileNav />
+                        </div>
+
                     </div>
 
 
@@ -161,7 +171,7 @@ const Header = () => {
                             {theme === 'dark' ? <Sun /> : <Moon />}
                         </button>
                         <Link href="/sign-in">
-                            <Button className={` ${theme === "light" ?"border border-black text-black bg-white hover:bg-black hover:text-white":"border text-black bg-white hover:bg-black hover:text-white hover:border-white"}`}>Log in</Button>
+                            <Button className={` ${theme === "light" ? "border border-black text-black bg-white hover:bg-black hover:text-white" : "border text-black bg-white hover:bg-black hover:text-white hover:border-white"}`}>Log in</Button>
                         </Link>
                         <Link href="/sign-up">
                             <Button className={`bg-dark-navy-blue text-white`}>Get Started</Button>

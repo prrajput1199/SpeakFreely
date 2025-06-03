@@ -43,7 +43,7 @@ export default function LandingPage() {
     Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false })
   );
 
-     const [isClient, setIsClient] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
 
     useEffect(() => {
